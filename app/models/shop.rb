@@ -9,4 +9,19 @@ class Shop < ActiveRecord::Base
     names
   end
 
+  def buyers
+    arry = []
+    names = []
+    Bike.where(shop_id: self.id).find_each do |bike|
+    id = bike.buyer_id
+    buyers = Buyer.find_by(id: id)
+    arry.push(buyers)
+    arry.each do |buyer|
+      names.push(buyer.first_name).uniq!
+    end
+
+    end
+    names
+  end
+
 end
